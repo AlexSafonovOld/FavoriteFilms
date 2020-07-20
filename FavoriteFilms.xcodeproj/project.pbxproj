@@ -43,6 +43,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B2D022024C5D6A50029380B /* NetWorkService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NetWorkService;
+			sourceTree = "<group>";
+		};
 		5BE7CAA224BFA0F00033F0B4 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +79,7 @@
 		5BE7CAC624BFA1D60033F0B4 /* Apllication */ = {
 			isa = PBXGroup;
 			children = (
+				5B2D022024C5D6A50029380B /* NetWorkService */,
 				5BE7CAB724BFA0F30033F0B4 /* Assets.xcassets */,
 				5BE7CAB924BFA0F30033F0B4 /* LaunchScreen.storyboard */,
 				5BE7CAB024BFA0F10033F0B4 /* SceneDelegate.swift */,
