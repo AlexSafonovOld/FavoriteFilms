@@ -19,9 +19,13 @@ class FilmTableViewCell: UITableViewCell {
     
     func setInfo(film: Film) {
         self.nameLabel.text = film.nameFilm
-        self.englishName.text = film.englishName
+        self.englishName.text = film.actor
+        let url = URL(string: film.imageName)
+        if let data = try? Data(contentsOf: url!) {
+            DispatchQueue.main.async {
+                self.imageFilm.image = UIImage(data: data)}
+        }
         self.ganreLabel.text = film.ganre
-        self.imageFilm.image = UIImage(named: film.imageName)
                 
     }
     

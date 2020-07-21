@@ -28,9 +28,13 @@ class DetailViewController: UITableViewController {
     private func setupCurrentInfo(){
         setNavigation()
         if currentInfo != nil {
-            imageDetai.image = UIImage(named: currentInfo!.imageName)
+            let url = URL(string: currentInfo!.imageName)
+                 if let data = try? Data(contentsOf: url!) {
+                     DispatchQueue.main.async {
+                        self.imageDetai.image = UIImage(data: data)}
+                 }
             nameFilmLabel.text = currentInfo?.nameFilm
-            englishNameLabel.text = currentInfo?.englishName
+            englishNameLabel.text = currentInfo?.actor
             janreLabel.text = currentInfo?.ganre
         }else {
             print ("Error")
@@ -44,7 +48,7 @@ class DetailViewController: UITableViewController {
         guard let topItem = navigationController?.navigationBar.topItem else {return}
         topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.leftBarButtonItem = nil
-        title = currentInfo?.englishName
+        title = currentInfo?.nameFilm
         
     }
     
