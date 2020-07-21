@@ -9,17 +9,19 @@
 import UIKit
 
 class FilmTableViewController: UITableViewController {
-    //* I know is not good!
-    let films = [Film(nameFilm: "Безумный Макс", englishName: "Mad Max", imageName: "madmax", ganre: "боевик"),
-                 Film(nameFilm: "Матрица", englishName: "Matrix", imageName: "matrix", ganre: "боевик"),
-                 Film(nameFilm: "Джокер", englishName: "Joker", imageName: "joker", ganre: "триллер, драмма"),
-                 Film(nameFilm: "Джанго освобожденный", englishName: "Jango unchained", imageName: "jango", ganre: "вестерн")]
-   //*
+    var film = [Film]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //get film
+        FavoriteFilmNetworkService.getFilm { (response) in
+            self.film = response.film
+            self.tableView.reloadData()
+        }
         tableView.tableFooterView = UIView()
+        tableView.reloadData()
+        
         
     }
 
@@ -32,13 +34,13 @@ class FilmTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return films.count
+        return film.count
     }
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! FilmTableViewCell
-        let allFilm = films[indexPath.row]
+        let allFilm = film[indexPath.row]
         cell.setInfo(film: allFilm)
       
         
@@ -88,11 +90,11 @@ class FilmTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailId" {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            let film = films[indexPath.row]
+            let films = film[indexPath.row]
             let dVc = segue.destination as! DetailViewController
-            dVc.currentInfo = film
+            dVc.currentInfo = films
         }
     }
-   
+
 
 }
